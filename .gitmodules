@@ -1,0 +1,3 @@
+[submodule "flutter_game"]
+	path = flutter_game
+	url = git@github.com:AnisovAleksey/flutter_game.git
