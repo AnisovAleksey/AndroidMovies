@@ -3,12 +3,11 @@ package com.podlodka.crew.movies.pages.movies
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.podlodka.crew.movies.MainActivity
 import com.podlodka.crew.movies.R
 import info.movito.themoviedbapi.TmdbApi
 import info.movito.themoviedbapi.model.Discover
@@ -30,6 +29,7 @@ class MoviesFragment : Fragment() {
             adapter = this@MoviesFragment.adapter
             layoutManager = LinearLayoutManager(this@MoviesFragment.requireContext())
         }
+        setHasOptionsMenu(true)
         adapter.notifyDataSetChanged()
     }
 
@@ -39,6 +39,20 @@ class MoviesFragment : Fragment() {
         val result = MoviesLoadTask().execute("7350a6c7c9b9924c18f1f6e23d3c7470")
         adapter.updateMovies(result.get())
         adapter.notifyDataSetChanged()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_game -> {
+                (requireActivity() as? MainActivity)?.openGameScreen()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
 

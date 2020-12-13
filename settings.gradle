@@ -1,2 +1,9 @@
 include ':app'
+
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir,
+        'flutter_game/.android/include_flutter.groovy'
+))
 rootProject.name = "Movies"
+include ':flutter_game'
